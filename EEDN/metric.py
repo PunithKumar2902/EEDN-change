@@ -39,6 +39,10 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
         recom_list, ground_list = top.cpu().numpy(), l.cpu().numpy()
         if len(ground_list) == 0:
             continue
+
+        print("Recomended list : ",recom_list)
+
+        print("ground list : ",ground_list)
         # map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
         pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
         pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
@@ -51,7 +55,7 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
     for i, e in enumerate(event_type):
         e = e[e!=0]-1
         target_[i][e] = 0
-    prediction = prediction * target_
+    
 
     # for i, topN in enumerate([1, 5, 10, 20]):
     for i, topN in enumerate([1, 5]):
