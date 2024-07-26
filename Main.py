@@ -135,7 +135,7 @@ def main(trial):
     # opt.lr = trial.suggest_uniform('learning_rate', 0.00008, 0.0002)
 
     opt.lr = 0.01
-    opt.epoch = 30
+    opt.epoch = 1
     opt.n_layers = 1  # 2
     opt.batch_size = 32
     opt.dropout = 0.5
@@ -191,6 +191,6 @@ if __name__ == '__main__':
     assert C.ENCODER in {'Transformer', 'gMLP', 'TransformerLS', 'hGCN'}
     assert C.ABLATION in {'Full', 'w/oImFe', 'w/oFeTra', 'w/oGlobal', 'w/oAtt', 'w/oConv', 'w/oGraIm'}
     study = optuna.create_study(direction="maximize")
-    study.optimize(main, n_trials=100)
+    study.optimize(main, n_trials=1)
 
 
