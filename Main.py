@@ -29,12 +29,11 @@ def train_epoch(model, user_dl, optimizer, opt):
         optimizer.zero_grad()
 
         """ prepare data """
-        
+        event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+
         print("event type : ",event_type)
         print("event time : ",event_time)
         print("test label : ",test_label)
-
-        event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         """ forward """
         prediction, users_embeddings = model(event_type)
