@@ -185,6 +185,15 @@ class Decoder(nn.Module):
         print()
         print("Final output shape : ",out.size())
         print()
+
+        n = out.size()[0]
+        m= out.size()[1]
+
+        for i in range(n):
+            for j in range(m):
+                print(out[i][j],end=' ')
+            print()
+
         return out
 
 
