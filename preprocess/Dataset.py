@@ -11,6 +11,8 @@ else:
 
 class Dataset(object):
     def __init__(self):
+
+        print("---------------------Inside Dataset Class ----------------------")
         self.user_num = C.USER_NUMBER
         self.poi_num = C.POI_NUMBER
         self.directory_path = './data/{dataset}/'.format(dataset=C.DATASET)
@@ -19,7 +21,11 @@ class Dataset(object):
         self.tuning_user, self.tuning_times,  self.tuning_ques = self.read_tuning_data()
         self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
-        self.user_data, self.user_valid = self.read_data()
+        self.user_data, self.user_valid,self.ques_traj = self.read_data()
+
+        print("train User traj shape : ", self.training_user.size())
+        print()
+        print("User traj shape : ", user_data.size() )
 
     def parse(self, data):
         user_traj, user_times, ques_traj = [[] for i in range(self.user_num)], [[] for i in range(self.user_num)], [[] for i in range(self.poi_num)]
@@ -58,6 +64,8 @@ class Dataset(object):
 
         if C.COLD_START:
             print('#User for Cold-Start', len(user_valid))
+
+        print()
         return user_data, user_valid
 
     def read_training_data(self):
