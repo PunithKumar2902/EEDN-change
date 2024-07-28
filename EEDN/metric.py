@@ -42,7 +42,7 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
         
         print("Recomended list : ",recom_list)
 
-        print("Recommended list shape : "recom_list.size())
+        print("Recommended list shape : ",recom_list.size())
         print()
         print()
 
