@@ -21,7 +21,7 @@ class Dataset(object):
         self.tuning_user, self.tuning_times,  self.tuning_ques = self.read_tuning_data()
         self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
-        self.user_data, self.user_valid,self.ques_traj = self.read_data()
+        self.user_data, self.user_valid= self.read_data()
 
         print("train User traj shape : ", self.training_user.size())
         print()
