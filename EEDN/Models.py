@@ -137,7 +137,9 @@ class Decoder(nn.Module):
             out = user_embeddings.matmul(embeddings.T[:, 1:])
             out = F.normalize(out, p=2, dim=-1, eps=1e-05)
             outputs.append(out)
-
+            print()
+            print("Normal ans shape : ",out.size())
+            print()
         if C.ABLATION != 'w/oImFe':
 
             if C.ABLATION != "w/oGraIm":
@@ -146,6 +148,10 @@ class Decoder(nn.Module):
                     graph_implicit = self.implicit_graph_features(user_embeddings)
                     graph_implicit = F.normalize(graph_implicit, p=2, dim=-1, eps=1e-05)
                     outputs.append(graph_implicit)
+
+                    print()
+                    print("grpah features size : ", graph_implicit.size())
+                    print()
 
             if C.ABLATION != "w/oAtt":
                 # seq1 implicit
@@ -156,6 +162,10 @@ class Decoder(nn.Module):
                 seq1_implicit = F.normalize(seq1_implicit, p=2, dim=-1, eps=1e-05)
                 outputs.append(seq1_implicit/2)
 
+                print()
+                print("Attention shape : ",seq1_implicit.size())
+                print()
+
             if C.ABLATION != "w/oConv":
                 # seq2 implicit
                 seq2_implicit = self.conv(enc_output.unsqueeze(1))
@@ -164,9 +174,17 @@ class Decoder(nn.Module):
                 seq2_implicit = F.normalize(seq2_implicit, p=2, dim=-1, eps=1e-05)
                 outputs.append(seq2_implicit*2)
 
+                print()
+                print("conv features shape : ",seq2_implicit.size())
+                print()
+
         outputs = torch.stack(outputs, dim=0).sum(0)
         out = torch.tanh(outputs)
         #Check input size compare withnop size
+
+        print()
+        print("Final output shape : ",out.size())
+        print()
         return out
 
 
