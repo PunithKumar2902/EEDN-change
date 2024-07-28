@@ -7,7 +7,7 @@ user_dict = {
     'ml-1M': 6038,  # 3533
     'douban-book': 12859,
     'Gowalla': 18737,
-    'Yelp2018': 11,
+    'Yelp2018': 31056,
     'Foursquare': 7642,
 }
 
@@ -15,7 +15,7 @@ poi_dict = {
     'ml-1M': 3533,  # 3629
     'douban-book': 22294,
     'Gowalla': 32510,
-    'Yelp2018': 8,
+    'Yelp2018': 42713,
     'Foursquare': 28483
 }
 

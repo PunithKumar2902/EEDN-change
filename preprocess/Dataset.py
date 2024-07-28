@@ -15,23 +15,25 @@ class Dataset(object):
         self.poi_num = C.POI_NUMBER
         self.directory_path = './data/{dataset}/'.format(dataset=C.DATASET)
 
-        self.training_user, self.training_times = self.read_training_data()
-        self.tuning_user, self.tuning_times = self.read_tuning_data()
-        self.test_user, self.test_times = self.read_test_data()
+        self.training_user, self.training_times, self.training_ques = self.read_training_data()
+        self.tuning_user, self.tuning_times,  self.tuning_ques = self.read_tuning_data()
+        self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
         self.user_data, self.user_valid = self.read_data()
 
     def parse(self, data):
-        user_traj, user_times = [[] for i in range(self.user_num)], [[] for i in range(self.user_num)]
+        user_traj, user_times, ques_traj = [[] for i in range(self.user_num)], [[] for i in range(self.user_num)], [[] for i in range(self.poi_num)]
         for eachline in data:
             uid, lid, times = eachline.strip().split()
             uid, lid, times = int(uid), int(lid), int(times)
             try:
                 user_traj[uid].append(lid+1)
                 user_times[uid].append(times+1)
+                ques_traj[lid].append(uid) #I added here
+
             except Exception as e:
                 print(uid, len(user_traj))
-        return user_traj, user_times
+        return user_traj, user_times,ques_traj
 
     def read_data(self):
         user_data, user_valid = [], []

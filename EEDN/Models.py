@@ -127,6 +127,12 @@ class Decoder(nn.Module):
 
     def forward(self, user_embeddings, embeddings, enc_output, slf_attn_mask):
         outputs = []
+
+        print("user embedding shape : ",user_embeddings.size())
+        print("embedding shape : ",embeddings.size())
+        print("enc_output shape : ",enc_output.shape)
+        print("self att mask : ",slf_attn_mask.shape)
+
         if C.ABLATION != 'w/oMatcher':
             out = user_embeddings.matmul(embeddings.T[:, 1:])
             out = F.normalize(out, p=2, dim=-1, eps=1e-05)
@@ -160,6 +166,7 @@ class Decoder(nn.Module):
 
         outputs = torch.stack(outputs, dim=0).sum(0)
         out = torch.tanh(outputs)
+        #Check input size compare withnop size
         return out
 
 

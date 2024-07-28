@@ -29,9 +29,11 @@ def train_epoch(model, user_dl, optimizer, opt):
         optimizer.zero_grad()
 
         """ prepare data """
+        #This passes user trajectory, no of times visited in tuning data, tuning trajectory
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         """ forward """
+        #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
 
         """ compute metric """
