@@ -191,7 +191,7 @@ class Decoder(nn.Module):
 
         for i in range(n):
             for j in range(m):
-                print(out[i][j],end=' ')
+                print(out[i][j].item(),end=' ')
             print()
 
         return out
