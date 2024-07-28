@@ -23,6 +23,8 @@ from tqdm import tqdm
 def train_epoch(model, user_dl, optimizer, opt):
     """ Epoch operation in training phase. """
 
+    print("----------------------Inside Train epoch---------------------")
+
     model.train()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
     for batch in tqdm(user_dl, mininterval=2, desc='  - (Training)   ', leave=False):
@@ -31,6 +33,11 @@ def train_epoch(model, user_dl, optimizer, opt):
         """ prepare data """
         #This passes user trajectory, no of times visited in tuning data, tuning trajectory
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+
+        print()
+        print("event_type : ",event_type)
+        print()
+        print()
 
         """ forward """
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
