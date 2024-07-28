@@ -39,10 +39,19 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
         recom_list, ground_list = top.cpu().numpy(), l.cpu().numpy()
         if len(ground_list) == 0:
             continue
-
+        
         print("Recomended list : ",recom_list)
 
+        print("Recommended list shape : "recom_list.size())
+        print()
+        print()
+
         print("ground list : ",ground_list)
+
+        print("ground list shape : ",ground_list.size())
+        print()
+        print()
+
         # map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
         pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
         pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
