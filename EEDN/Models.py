@@ -211,6 +211,10 @@ class Model(nn.Module):
         self.decoder = Decoder(d_model, num_types)
 
     def forward(self, event_type):
+
+        print("event type : ",event_type.size())
+        print()
+
         slf_attn_mask_subseq = get_subsequent_mask(event_type)  # M * L * L
         slf_attn_mask_keypad = get_attn_key_pad_mask(seq_k=event_type, seq_q=event_type)  # M x lq x lk
         slf_attn_mask_keypad = slf_attn_mask_keypad.type_as(slf_attn_mask_subseq)
