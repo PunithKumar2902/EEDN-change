@@ -9,6 +9,9 @@ else:
     import torch as T
 
 def get_shape(nested_list):
+
+    if(len(nested_list)==0):
+        return 0
     if isinstance(nested_list, list):
         return [len(nested_list)] + get_shape(nested_list[0])
     else:
