@@ -67,5 +67,6 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
     prediction = prediction * target_
 
     # for i, topN in enumerate([1, 5, 10, 20]):
-    for i, topN in enumerate([1, 5]):
+    # for i, topN in enumerate([1, 5]):
+    for i, topN in enumerate([1]):
         vaild(prediction, label, topN, pre[i], rec[i], map_[i], ndcg[i])
