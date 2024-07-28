@@ -8,15 +8,6 @@ if torch.cuda.is_available():
 else:
     import torch as T
 
-def get_shape(nested_list):
-
-    if(len(nested_list)==0):
-        return 0
-    if isinstance(nested_list, list):
-        return [len(nested_list)] + get_shape(nested_list[0])
-    else:
-        return []
-
 class Dataset(object):
     def __init__(self):
 
@@ -31,9 +22,9 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
 
-        print("train User traj shape : ", get_shape(self.training_user))
+        print("train User traj shape : ", self.training_user[0])
         print()
-        print("User traj shape : ", get_shape(self.user_data))
+        print("User traj shape : ", self.user_data[0])
 
     def parse(self, data):
         user_traj, user_times, ques_traj = [[] for i in range(self.user_num)], [[] for i in range(self.user_num)], [[] for i in range(self.poi_num)]
