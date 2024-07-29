@@ -72,6 +72,20 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
         target_[i][e] = 0
     prediction = prediction * target_
 
+    print()
+    print("prediction shape : ",prediction.size())
+    print()
+
+    print()
+    print("label shape : ",label.size())
+    print()
+
+    transposed_tensor = torch.transpose(prediction, 0, 1)
+
+    print()
+    print("new prediction shape : ",transposed_tensor.size())
+    print()    
+
     # for i, topN in enumerate([1, 5, 10, 20]):
     # for i, topN in enumerate([1, 5]):
     for i, topN in enumerate([1]):
