@@ -33,8 +33,8 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
     top_ = torch.topk(prediction, top_n, -1, sorted=True)[1]
 
     print("top size : ",top_.size())
-    xyz = torch.tensor(label)
-    print("ground list shape : ",xyz.size())
+    
+    print("ground list shape : ",label.size())
 
     for top, l in zip(top_, label):
         try:
