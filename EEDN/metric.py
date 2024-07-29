@@ -43,6 +43,7 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
         if len(l)==0:
             continue
         try:
+            print(l)
             l = l[l != 0] - 1
         except Exception as e:
             l = l[l != 0]
