@@ -128,10 +128,10 @@ class Decoder(nn.Module):
     def forward(self, user_embeddings, embeddings, enc_output, slf_attn_mask):
         outputs = []
 
-        print("user embedding shape : ",user_embeddings.size())
-        print("embedding shape : ",embeddings.size())
-        print("enc_output shape : ",enc_output.shape)
-        print("self att mask : ",slf_attn_mask.shape)
+        # print("user embedding shape : ",user_embeddings.size())
+        # print("embedding shape : ",embeddings.size())
+        # print("enc_output shape : ",enc_output.shape)
+        # print("self att mask : ",slf_attn_mask.shape)
 
         if C.ABLATION != 'w/oMatcher':
             out = user_embeddings.matmul(embeddings.T[:, 1:])
