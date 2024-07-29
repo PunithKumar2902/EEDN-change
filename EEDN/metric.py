@@ -76,7 +76,7 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print()
 
 
-def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
+def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
 
     print("--------------------Inside pre rec top--------------------")
     # filter out the visited POI
@@ -113,4 +113,4 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
     # for i, topN in enumerate([1, 5, 10, 20]):
     # for i, topN in enumerate([1, 5]):
     for i, topN in enumerate([1]):
-        vaild(prediction, label, topN, pre[i], rec[i], map_[i], ndcg[i])
+        vaild(prediction, label__, label, topN, pre[i], rec[i], map_[i], ndcg[i])
