@@ -23,7 +23,7 @@ class Dataset(object):
         self.tuning_dl= torch.utils.data.DataLoader(
             self.tuning_ques,
             num_workers=0,
-            batch_size=C>POI_NUMBER
+            batch_size=C.POI_NUMBER
         )
 
         self.user_data, self.user_valid= self.read_data()
