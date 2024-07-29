@@ -28,8 +28,13 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
     model.train()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
 
-    labels__   = ds.tuning_ques
+    # labels__   = ds.tuning_ques
+    s_dl  = ds.use() #got the data loader for labels
+    
+    # for i in s_dl:
+    #     labels_ = i
 
+    # print("labels : ",labels__)
     for batch in tqdm(user_dl, mininterval=2, desc='  - (Training)   ', leave=False):
         optimizer.zero_grad()
 
@@ -39,6 +44,13 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         # pun = torch.from_numpy(np.array(batch))
         # print("batch shape : ",pun.size())
         print("batch print ",batch)
+
+        for i in s_dl:
+            labels_ = i
+
+            print("labels : ",labels__)
+
+        print("---------------------------------------------------------------")
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         # print()
