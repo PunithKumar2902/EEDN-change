@@ -27,7 +27,7 @@ class Dataset(object):
             self.tuning_ques,
             num_workers=0,
             batch_size=1,
-            collate_fn=self.user_fn,
+            collate_fn=self.user_fn1,
             shuffle=True
             )
         return tuning_dl
