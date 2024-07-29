@@ -33,7 +33,8 @@ def train_epoch(model, user_dl, optimizer, opt):
         """ prepare data """
         #This passes user trajectory, no of times visited in tuning data, tuning trajectory
 
-        print("batch shape : ",batch.size())
+        pun = batch.to(opt.device)
+        print("batch shape : ",pun.size())
 
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
