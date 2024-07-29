@@ -22,7 +22,7 @@ class Dataset(object):
 
         self.ques_traj_ =[] 
         for i in range(C.POI_NUMBER):
-            ques_traj_.append((self.tuning_ques[i]))
+            self.ques_traj_.append((self.tuning_ques[i]))
         
         self.tuning_dl= torch.utils.data.DataLoader(
             self.ques_traj_,
