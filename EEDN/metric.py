@@ -39,14 +39,14 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print("\n",label[1])
 
     i=0
-    # for top, l in zip(top_, label__):
-    for top, l in zip(top_, label):
-        print("\nchecking in pre rec top\n")
+    print("\nchecking in pre rec top\n")
+    for top, l in zip(top_, label__):
+    # for top, l in zip(top_, label):
         # if len(l)==0:
         #     continue
         try:
-            print("try ",label_[i])
-            print("org ", l)
+            print("org ",label[i])
+            print("try ", l)
             i+=1
             l = l[l != 0] - 1
         except Exception as e:
@@ -93,8 +93,8 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
         e = e[e!=0]-1
         target_[i][e] = 0
 
-    print("prediction size : ",prediction.size())
-    print("target size : ",target_.size())
+    # print("prediction size : ",prediction.size())
+    # print("target size : ",target_.size())
     prediction = prediction * target_
 
     # print()
