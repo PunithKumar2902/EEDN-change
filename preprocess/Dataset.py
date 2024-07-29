@@ -125,10 +125,11 @@ class Dataset(object):
 
     def user_fn(self, insts):
         """ Collate function, as required by PyTorch. """
-        (event_type, event_time, test_label) = list(zip(*insts))
+        (event_type, event_time, test_label,ques_ev_type) = list(zip(*insts))
         event_type = self.paddingLong2D(event_type)
         event_time = self.paddingLong2D(event_time)
         test_label = self.paddingLong2D(test_label)
+        ques_ev_type = self.paddingLong2D(ques_ev_type)
         # print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
         return event_type, event_time, test_label
