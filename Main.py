@@ -36,30 +36,33 @@ def train_epoch(model, user_dl, optimizer, opt):
         # pun = torch.from_numpy(np.array(batch))
         # print("batch shape : ",pun.size())
 
-        event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+        event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
 
-        print()
-        print("event_type shape : ",event_type.size())
-        # print("event_type : ",event_type)
-        print()
+        # print()
+        # print("event_type shape : ",event_type.size())
+        # # print("event_type : ",event_type)
+        # print()
         
-        print()
-        print("test_label shape : ",test_label.size())
-        # print("event_type : ",event_type)
-        print()
+        # print()
+        # print("test_label shape : ",test_label.size())
+        # # print("event_type : ",event_type)
+        # print()
 
         """ forward """
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
 
+        prediction = torch.transpose(prediction, 0, 1)
+
         print("prediction shape : ",prediction.size())
         print()
 
         """ compute metric """
-        metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)
+        # metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)
+        metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, ques_ev_type)
 
         """ backward """
-        loss = Utils.type_loss(prediction, event_type, event_time, test_label, opt)
+        loss = Utils.type_loss(prediction,ques_ev_type, event_time, test_label, opt)
 
         loss.backward(retain_graph=True)
         """ update parameters """
@@ -78,13 +81,15 @@ def eval_epoch(model, user_valid_dl, opt):
         for batch in tqdm(user_valid_dl, mininterval=2,
                           desc='  - (Validation) ', leave=False):
             """ prepare test data """
-            event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+            event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
 
             """ forward """
             prediction, users_embeddings = model(event_type)  # X = (UY+Z) ^ T
 
+            prediction = torch.transpose(prediction, 0, 1)
+
             """ compute metric """
-            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)
+            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, ques_ev_type)
 
     results_np = map(lambda x: [np.around(np.mean(i), 5) for i in x], [pre, rec, map_, ndcg])
     return results_np

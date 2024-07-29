@@ -61,30 +61,32 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
 
     print("--------------------Inside pre rec top--------------------")
     # filter out the visited POI
-    target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
-    print()
-    print("event_type : ")
-    print(event_type)
-    print()
+    # target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
+    target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
+    # print()
+    # print("event_type : ")
+    # print(event_type)
+    # print()
+
     for i, e in enumerate(event_type):
         print(i,e)
         e = e[e!=0]-1
         target_[i][e] = 0
     prediction = prediction * target_
 
-    print()
-    print("prediction shape : ",prediction.size())
-    print()
+    # print()
+    # print("prediction shape : ",prediction.size())
+    # print()
 
-    print()
-    print("label shape : ",label.size())
-    print()
+    # print()
+    # print("label shape : ",label.size())
+    # print()
 
-    transposed_tensor = torch.transpose(prediction, 0, 1)
+    
 
-    print()
-    print("new prediction shape : ",transposed_tensor.size())
-    print()    
+    # print()
+    # print("new prediction shape : ",transposed_tensor.size())
+    # print()    
 
     # for i, topN in enumerate([1, 5, 10, 20]):
     # for i, topN in enumerate([1, 5]):

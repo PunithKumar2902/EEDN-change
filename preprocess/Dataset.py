@@ -39,7 +39,7 @@ class Dataset(object):
             try:
                 user_traj[uid].append(lid+1)
                 user_times[uid].append(times+1)
-                ques_traj[lid].append(uid) #I added here
+                ques_traj[lid].append(uid+1) #I added here
 
             except Exception as e:
                 print(uid, len(user_traj))
@@ -57,14 +57,17 @@ class Dataset(object):
             #     dict_[i] = 1
 
         for i in range(self.user_num):
-            user_data.append((self.training_user[i], self.tuning_times[i], self.tuning_user[i], ), )
+            user_data.append((self.training_user[i], self.tuning_times[i], self.tuning_ques[i],self.training_ques[i], ), )#line changed
             if C.COLD_START and i not in dict_:  # time complexity of O(1)
                 continue
             valid_input = self.training_user[i].copy()
             valid_input.extend(self.tuning_user[i])
             valid_times = self.training_times[i].copy()
             valid_times.extend(self.tuning_times[i])
-            user_valid.append((valid_input, valid_times, self.test_user[i], ), )
+            valid_n_input = self.training_ques[i].copy()
+            valid_n_input.extend(self.tuning_ques[i])
+
+            user_valid.append((valid_input, valid_times, self.test_ques[i],valid_n_input), )#line changed
 
         print()
 
