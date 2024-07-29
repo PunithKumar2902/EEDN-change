@@ -24,7 +24,7 @@ class Dataset(object):
 
         for i in range(len(self.training_user)):
 
-            print("train User traj : ", self.training_user[0])
+            print("train User : ", self.training_user[i])
             print()
         # print("User traj : ", self.user_data[0])
 
