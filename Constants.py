@@ -8,8 +8,8 @@ user_dict = {
     'douban-book': 12859,
     'Gowalla': 18737,
     'Yelp2018': 11,
-    # 'Yelp2018': 31056,
-    'Foursquare': 7642,
+    'Yelp2018': 31056,
+    # 'Foursquare': 7642,
 }
 
 poi_dict = {
@@ -17,8 +17,8 @@ poi_dict = {
     'douban-book': 22294,
     'Gowalla': 32510,
     'Yelp2018': 9,
-    # 'Yelp2018': 42713,
-    'Foursquare': 28483
+    'Yelp2018': 42713,
+    # 'Foursquare': 28483
 }
 
 POI_NUMBER = poi_dict.get(DATASET)
