@@ -20,8 +20,12 @@ class Dataset(object):
         self.tuning_user, self.tuning_times,  self.tuning_ques = self.read_tuning_data()
         self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
+        self.ques_traj_ =[] 
+        for i in range(C.POI_NUMBER):
+            ques_traj_.append((self.tuning_ques[i]))
+        
         self.tuning_dl= torch.utils.data.DataLoader(
-            self.tuning_ques,
+            self.ques_traj_,
             num_workers=0,
             batch_size=C.POI_NUMBER
         )
