@@ -29,7 +29,7 @@ def precision_recall_ndcg_at_k(k, rankedlist, test_matrix):
     return float(count / k), float(count / len(test_matrix)), map, float(dcg_k / idcg_k)
 
 
-def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
+def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     top_ = torch.topk(prediction, top_n, -1, sorted=True)[1]
 
     print("top size : ",top_.size())
@@ -38,12 +38,15 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
     print("\nexamples : ",label[0])
     print("\n",label[1])
 
+    i=0
     for top, l in zip(top_, label):
 
         if len(l)==0:
             continue
         try:
+            print(label_[i])
             print(l)
+            i+=1
             l = l[l != 0] - 1
         except Exception as e:
             l = l[l != 0]
