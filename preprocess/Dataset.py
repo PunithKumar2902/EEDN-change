@@ -76,7 +76,7 @@ class Dataset(object):
             #     dict_[i] = 1
 
         for i in range(self.user_num):
-            user_data.append((self.training_user[i], self.tuning_times[i],self.tuning_user[i],), )
+            user_data.append((self.training_user[i], self.tuning_times[i],self.tuning_user[i],self.tuning_ques[i]), )
             if C.COLD_START and i not in dict_:  # time complexity of O(1)
                 continue
             valid_input = self.training_user[i].copy()

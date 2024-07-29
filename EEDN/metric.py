@@ -38,16 +38,16 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print("\nexamples : ",label[0])
     # print("\n",label[1])
 
-    i=0
-    print("\nchecking in pre rec top\n")
+    # i=0
+    # print("\nchecking in pre rec top\n")
     for top, l in zip(top_, label__):
     # for top, l in zip(top_, label):
         # if len(l)==0:
         #     continue
         try:
-            print("org ",label[i])
-            print("try ", l)
-            i+=1
+            # print("org ",label[i])
+            # print("try ", l)
+            # i+=1
             l = l[l != 0] - 1
         except Exception as e:
             l = l[l != 0]
@@ -57,7 +57,7 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
         
         # print("ground list shape : ",label.size())
 
-        # map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
+        map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
 
 
 ################ MUST UNCOMMENT ######################################        
@@ -77,12 +77,12 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print()
 
 
-def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
+def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_typ):
 
     print("--------------------Inside pre rec top--------------------")
     # filter out the visited POI
-    target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
-    # target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
+    # target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
+    target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
     # print()
     # print("event_type : ")
     # print(event_type)
@@ -95,7 +95,9 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
 
     # print("prediction size : ",prediction.size())
     # print("target size : ",target_.size())
-    prediction = prediction * target_
+    
+    prediction_ = torch.transpose(prediction, 0, 1)
+    prediction_ = prediction_ * target_
 
     # print()
     # print("prediction shape : ",prediction.size())
@@ -114,4 +116,4 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
     # for i, topN in enumerate([1, 5, 10, 20]):
     # for i, topN in enumerate([1, 5]):
     for i, topN in enumerate([1]):
-        vaild(prediction, label__, label, topN, pre[i], rec[i], map_[i], ndcg[i])
+        vaild(prediction_, label__, label, topN, pre[i], rec[i], map_[i], ndcg[i])

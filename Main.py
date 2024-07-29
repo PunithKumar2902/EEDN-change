@@ -46,13 +46,13 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         print("batch print ",batch)
 
         labels__ = []
-        for i in s_dl:
-            labels__ = i
+        # for i in s_dl:
+        #     labels__ = i
 
-            print("labels : ",i)
+        #     print("labels : ",i)
 
         print("---------------------------------------------------------------")
-        event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+        event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
 
         # print()
         # print("event_type shape : ",event_type.size())
