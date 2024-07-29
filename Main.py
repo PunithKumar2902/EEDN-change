@@ -45,8 +45,9 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         # print("batch shape : ",pun.size())
         print("batch print ",batch)
 
+        labels__ = []
         for i in s_dl:
-            # labels__ = i
+            labels__ = i
 
             print("labels : ",i)
 
