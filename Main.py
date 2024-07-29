@@ -20,13 +20,15 @@ from EEDN.Models import Model
 from tqdm import tqdm
 
 
-def train_epoch(model, user_dl, optimizer, opt):
+def train_epoch(model, user_dl, ds, optimizer, opt):
     """ Epoch operation in training phase. """
 
     print("----------------------Inside Train epoch---------------------")
 
     model.train()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
+
+    labels__   = ds.tuning_ques
     for batch in tqdm(user_dl, mininterval=2, desc='  - (Training)   ', leave=False):
         optimizer.zero_grad()
 
@@ -36,7 +38,7 @@ def train_epoch(model, user_dl, optimizer, opt):
         # pun = torch.from_numpy(np.array(batch))
         # print("batch shape : ",pun.size())
 
-        event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
+        event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         # print()
         # print("event_type shape : ",event_type.size())
@@ -59,10 +61,10 @@ def train_epoch(model, user_dl, optimizer, opt):
 
         """ compute metric """
         # metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)
-        metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, ques_ev_type)
+        metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__, event_type)
 
         """ backward """
-        loss = Utils.type_loss(prediction,ques_ev_type, event_time, test_label, opt)
+        loss = Utils.type_loss(prediction, event_type, event_time, labels__, opt)
 
         loss.backward(retain_graph=True)
         """ update parameters """
@@ -72,7 +74,7 @@ def train_epoch(model, user_dl, optimizer, opt):
     return results_np
 
 
-def eval_epoch(model, user_valid_dl, opt):
+def eval_epoch(model, user_valid_dl, ds, opt):
     """ Epoch operation in evaluation phase. """
 
     model.eval()
@@ -81,21 +83,21 @@ def eval_epoch(model, user_valid_dl, opt):
         for batch in tqdm(user_valid_dl, mininterval=2,
                           desc='  - (Validation) ', leave=False):
             """ prepare test data """
-            event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
+            event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
             """ forward """
             prediction, users_embeddings = model(event_type)  # X = (UY+Z) ^ T
 
-            prediction = torch.transpose(prediction, 0, 1)
+            # prediction = torch.transpose(prediction, 0, 1)
 
             """ compute metric """
-            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, ques_ev_type)
+            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__, event_type)
 
     results_np = map(lambda x: [np.around(np.mean(i), 5) for i in x], [pre, rec, map_, ndcg])
     return results_np
 
 
-def train(model, data, optimizer, scheduler, opt):
+def train(model, data, ds, optimizer, scheduler, opt):
     """ Start training. """
     (user_valid_dl, user_dl) = data
 
@@ -105,14 +107,14 @@ def train(model, data, optimizer, scheduler, opt):
 
         np.set_printoptions(formatter={'float': '{: 0.5f}'.format})
         start = time.time()
-        [pre, rec, map_, ndcg] = train_epoch(model, user_dl, optimizer, opt)
+        [pre, rec, map_, ndcg] = train_epoch(model, user_dl, ds, optimizer, opt)
         print('\r(Training)  P@k:{pre},    R@k:{rec}, \n'
               '(Training)map@k:{map_}, ndcg@k:{ndcg}, '
               'elapse:{elapse:3.3f} min'
               .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, map_=map_, ndcg=ndcg))
 
         start = time.time()
-        [pre, rec, map_, ndcg] = eval_epoch(model, user_valid_dl, opt)
+        [pre, rec, map_, ndcg] = eval_epoch(model, user_valid_dl, ds, opt)
         print('\r(Test)  P@k:{pre},    R@k:{rec}, \n'
               '(Test)map@k:{map_}, ndcg@k:{ndcg}, '
               'elapse:{elapse:3.3f} min'
@@ -210,7 +212,7 @@ def main(trial):
     scheduler = optim.lr_scheduler.StepLR(optimizer, 10, gamma=0.5)
 
     """ train the model """
-    return train(model, data, optimizer, scheduler, opt)
+    return train(model, data,ds, optimizer, scheduler, opt)
 
 
 if __name__ == '__main__':
