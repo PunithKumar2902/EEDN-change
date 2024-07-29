@@ -38,7 +38,7 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print("\nexamples : ",label[0])
     # print("\n",label[1])
 
-    i=0
+        i=0
     # for top, l in zip(top_, label__):
     # for top, l in zip(top_, label):
         print("\nchecking in pre rec top\n")
