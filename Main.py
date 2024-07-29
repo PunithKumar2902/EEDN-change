@@ -33,13 +33,13 @@ def train_epoch(model, user_dl, optimizer, opt):
         """ prepare data """
         #This passes user trajectory, no of times visited in tuning data, tuning trajectory
 
-        pun = torch.from_numpy(np.array(batch))
-        print("batch shape : ",pun.size())
+        # pun = torch.from_numpy(np.array(batch))
+        # print("batch shape : ",pun.size())
 
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         print()
-        print("event_type shape : ",event_type.size())
+        # print("event_type shape : ",event_type.size())
         print("event_type : ",event_type)
         print()
         print()
@@ -47,6 +47,9 @@ def train_epoch(model, user_dl, optimizer, opt):
         """ forward """
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
+
+        print("prediction shape : ",prediction.size())
+        print()
 
         """ compute metric """
         metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)
