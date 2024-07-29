@@ -67,7 +67,7 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
     print(event_type)
     print()
     for i, e in enumerate(event_type):
-        prtint(i,e)
+        print(i,e)
         e = e[e!=0]-1
         target_[i][e] = 0
     prediction = prediction * target_
