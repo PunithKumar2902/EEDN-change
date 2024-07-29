@@ -84,7 +84,7 @@ class Dataset(object):
             valid_times = self.training_times[i].copy()
             valid_times.extend(self.tuning_times[i])
 
-            user_valid.append((valid_input, valid_times, self.test_user[i]), )#line changed
+            user_valid.append((valid_input, valid_times, self.test_user[i],self.test_ques[i]), )#line changed
 
         print()
 
@@ -132,7 +132,7 @@ class Dataset(object):
         ques_ev_type = self.paddingLong2D(ques_ev_type)
         # print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
-        return event_type, event_time, test_label
+        return event_type, event_time, test_label,ques_ev_type
 
     def user_fn1(self, insts):
         """ Collate function, as required by PyTorch. """
