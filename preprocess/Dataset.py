@@ -22,8 +22,8 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
 
-        def use(self):        
-            tuning_dl = torch.utils.data.DataLoader(
+    def use(self):        
+        tuning_dl = torch.utils.data.DataLoader(
             self.tuning_ques,
             num_workers=0,
             batch_size=1,
@@ -120,6 +120,13 @@ class Dataset(object):
         test_label = self.paddingLong2D(test_label)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
         return event_type, event_time, test_label
+
+    def user_fn1(self, insts):
+        """ Collate function, as required by PyTorch. """
+        (event_type) = list(zip(*insts))
+        event_type = self.paddingLong2D(event_type)
+        # ques_ev_type = self.paddingLong2D(ques_ev_type)
+        return event_type
 
     def get_user_dl(self, batch_size):
         user_dl = torch.utils.data.DataLoader(
