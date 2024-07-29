@@ -217,16 +217,10 @@ def main(trial):
 
 
 if __name__ == '__main__':
-    # assert C.ENCODER in {'Transformer', 'gMLP', 'TransformerLS', 'hGCN'}
-    # assert C.ABLATION in {'Full', 'w/oImFe', 'w/oFeTra', 'w/oGlobal', 'w/oAtt', 'w/oConv', 'w/oGraIm'}
-    # study = optuna.create_study(direction="maximize")
-    # study.optimize(main, n_trials=1)
-
-    ds = dataset()
-
-    tune = ds.use()
-
-    for i in tune:
-        print(i)
+    assert C.ENCODER in {'Transformer', 'gMLP', 'TransformerLS', 'hGCN'}
+    assert C.ABLATION in {'Full', 'w/oImFe', 'w/oFeTra', 'w/oGlobal', 'w/oAtt', 'w/oConv', 'w/oGraIm'}
+    study = optuna.create_study(direction="maximize")
+    study.optimize(main, n_trials=1)
+        
 
 

@@ -21,13 +21,13 @@ class Dataset(object):
         self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
         self.user_data, self.user_valid= self.read_data()
-        self.ques_data = read_data1()
+        self.ques_data = self.read_data1()
 
     def use(self):        
         tuning_dl = torch.utils.data.DataLoader(
             self.ques_data,
             num_workers=0,
-            batch_size=1,
+            batch_size=self.poi_num,
             collate_fn=self.user_fn1,
             shuffle=True
             )
@@ -38,7 +38,7 @@ class Dataset(object):
 
         for i in range(self.poi_num):
             user_data.append(self.tuning_ques[i],)
-            
+
         return user_data
 
         # for i in range(len(self.training_user)):
@@ -109,6 +109,7 @@ class Dataset(object):
     def paddingLong2D(self, insts):
         """ Pad the instance to the max seq length in batch. """
         max_len = 700  # max_len = max(len(inst) for inst in insts)
+
         batch_seq = np.array([
             inst[:max_len] + [C.PAD] * (max_len - len(inst))
             for inst in insts])
@@ -128,12 +129,13 @@ class Dataset(object):
         event_type = self.paddingLong2D(event_type)
         event_time = self.paddingLong2D(event_time)
         test_label = self.paddingLong2D(test_label)
+        print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
         return event_type, event_time, test_label
 
     def user_fn1(self, insts):
         """ Collate function, as required by PyTorch. """
-        (event_type) = list(zip(*insts))
+        event_type = insts
         event_type = self.paddingLong2D(event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
         return event_type
