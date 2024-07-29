@@ -54,8 +54,8 @@ def train_epoch(model, user_dl, optimizer, opt):
 
         prediction = torch.transpose(prediction, 0, 1)
 
-        print("prediction shape : ",prediction.size())
-        print()
+        # print("prediction shape : ",prediction.size())
+        # print()
 
         """ compute metric """
         # metric.pre_rec_top(pre, rec, map_, ndcg, prediction, test_label, event_type)

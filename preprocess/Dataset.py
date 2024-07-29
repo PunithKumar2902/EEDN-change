@@ -22,14 +22,14 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
 
-        for i in range(len(self.training_user)):
+        # for i in range(len(self.training_user)):
 
-            print("train User : ", self.training_user[i])
-            print()
+        #     print("train User : ", self.training_user[i])
+        #     print()
         
-        for i in range(len(self.user_data)):
-            print("User traj : ", self.user_data[i])
-            print()   
+        # for i in range(len(self.user_data)):
+        #     print("User traj : ", self.user_data[i])
+        #     print()   
 
     def parse(self, data):
         user_traj, user_times, ques_traj = [[] for i in range(self.user_num)], [[] for i in range(self.user_num)], [[] for i in range(self.poi_num)]

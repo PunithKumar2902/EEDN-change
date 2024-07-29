@@ -128,18 +128,18 @@ class Decoder(nn.Module):
     def forward(self, user_embeddings, embeddings, enc_output, slf_attn_mask):
         outputs = []
 
-        print("user embedding shape : ",user_embeddings.size())
-        print("embedding shape : ",embeddings.size())
-        print("enc_output shape : ",enc_output.shape)
-        print("self att mask : ",slf_attn_mask.shape)
+        # print("user embedding shape : ",user_embeddings.size())
+        # print("embedding shape : ",embeddings.size())
+        # print("enc_output shape : ",enc_output.shape)
+        # print("self att mask : ",slf_attn_mask.shape)
 
         if C.ABLATION != 'w/oMatcher':
             out = user_embeddings.matmul(embeddings.T[:, 1:])
             out = F.normalize(out, p=2, dim=-1, eps=1e-05)
             outputs.append(out)
-            print()
-            print("Normal ans shape : ",out.size())
-            print()
+            # print()
+            # print("Normal ans shape : ",out.size())
+            # print()
         if C.ABLATION != 'w/oImFe':
 
             if C.ABLATION != "w/oGraIm":
@@ -149,9 +149,9 @@ class Decoder(nn.Module):
                     graph_implicit = F.normalize(graph_implicit, p=2, dim=-1, eps=1e-05)
                     outputs.append(graph_implicit)
 
-                    print()
-                    print("grpah features size : ", graph_implicit.size())
-                    print()
+                    # print()
+                    # print("grpah features size : ", graph_implicit.size())
+                    # print()
 
             if C.ABLATION != "w/oAtt":
                 # seq1 implicit
@@ -162,9 +162,9 @@ class Decoder(nn.Module):
                 seq1_implicit = F.normalize(seq1_implicit, p=2, dim=-1, eps=1e-05)
                 outputs.append(seq1_implicit/2)
 
-                print()
-                print("Attention shape : ",seq1_implicit.size())
-                print()
+                # print()
+                # print("Attention shape : ",seq1_implicit.size())
+                # print()
 
             if C.ABLATION != "w/oConv":
                 # seq2 implicit
@@ -174,25 +174,25 @@ class Decoder(nn.Module):
                 seq2_implicit = F.normalize(seq2_implicit, p=2, dim=-1, eps=1e-05)
                 outputs.append(seq2_implicit*2)
 
-                print()
-                print("conv features shape : ",seq2_implicit.size())
-                print()
+                # print()
+                # print("conv features shape : ",seq2_implicit.size())
+                # print()
 
         outputs = torch.stack(outputs, dim=0).sum(0)
         out = torch.tanh(outputs)
         #Check input size compare withnop size
 
-        print()
-        print("Final output shape : ",out.size())
-        print()
+        # print()
+        # print("Final output shape : ",out.size())
+        # print()
 
-        n = out.size()[0]
-        m= out.size()[1]
+        # n = out.size()[0]
+        # m= out.size()[1]
 
-        for i in range(n):
-            for j in range(m):
-                print(out[i][j].item(),end=' ')
-            print()
+        # for i in range(n):
+        #     for j in range(m):
+        #         print(out[i][j].item(),end=' ')
+        #     print()
 
         return out
 
@@ -213,8 +213,8 @@ class Model(nn.Module):
 
     def forward(self, event_type):
 
-        print("event type size : ",event_type.size())
-        print()
+        # print("event type size : ",event_type.size())
+        # print()
 
         slf_attn_mask_subseq = get_subsequent_mask(event_type)  # M * L * L
         slf_attn_mask_keypad = get_attn_key_pad_mask(seq_k=event_type, seq_q=event_type)  # M x lq x lk

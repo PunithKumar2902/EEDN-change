@@ -46,15 +46,15 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
 
     # print("Recomended list : ",recom_list)
 
-    print("Recommended list shape : ",prediction.size())
-    print()
-    print()
+    # print("Recommended list shape : ",prediction.size())
+    # print()
+    # print()
 
-    # print("ground list : ",ground_list)
+    # # print("ground list : ",ground_list)
 
-    print("ground list shape : ",label.size())
-    print()
-    print()
+    # print("ground list shape : ",label.size())
+    # print()
+    # print()
 
 
 def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
