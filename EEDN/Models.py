@@ -202,6 +202,7 @@ class Model(nn.Module):
             self,  num_types, d_model=256, n_layers=4, n_head=4, dropout=0.1, device=0):
         super(Model, self).__init__()
 
+        print("----------------------Inside Model Class----------------------------")
         self.event_emb = nn.Embedding(num_types+1, d_model, padding_idx=C.PAD)  # dding 0
         self.encoder = Encoder(
             num_types=num_types, d_model=d_model,
@@ -212,7 +213,7 @@ class Model(nn.Module):
 
     def forward(self, event_type):
 
-        print("event type : ",event_type.size())
+        print("event type size : ",event_type.size())
         print()
 
         slf_attn_mask_subseq = get_subsequent_mask(event_type)  # M * L * L
