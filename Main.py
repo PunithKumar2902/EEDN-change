@@ -46,9 +46,9 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         print("batch print ",batch)
 
         for i in s_dl:
-            labels_ = i
+            # labels__ = i
 
-            print("labels : ",labels__)
+            print("labels : ",i)
 
         print("---------------------------------------------------------------")
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
