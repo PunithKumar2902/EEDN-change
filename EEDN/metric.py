@@ -61,8 +61,8 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label, event_type):
 
     print("--------------------Inside pre rec top--------------------")
     # filter out the visited POI
-    # target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
-    target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
+    target_ = torch.ones(event_type.size()[0], C.POI_NUMBER, device='cuda:0', dtype=torch.double)
+    # target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
     # print()
     # print("event_type : ")
     # print(event_type)
