@@ -7,7 +7,7 @@ user_dict = {
     'ml-1M': 6038,  # 3533
     'douban-book': 12859,
     'Gowalla': 18737,
-    'Yelp2018': 11,
+    # 'Yelp2018': 11,
     'Yelp2018': 31056,
     # 'Foursquare': 7642,
 }
