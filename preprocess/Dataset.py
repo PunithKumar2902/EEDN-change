@@ -36,9 +36,9 @@ class Dataset(object):
     def read_data1(self):
         user_data =[]
 
-        for i in range(self.poi_num)
-        user_data.append(self.tuning_ques[i],)
-        
+        for i in range(self.poi_num):
+            user_data.append(self.tuning_ques[i],)
+            
         return user_data
 
         # for i in range(len(self.training_user)):
