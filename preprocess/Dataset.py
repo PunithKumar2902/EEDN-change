@@ -21,16 +21,26 @@ class Dataset(object):
         self.test_user, self.test_times,  self.test_ques = self.read_test_data()
 
         self.user_data, self.user_valid= self.read_data()
+        self.ques_data = read_data1()
 
     def use(self):        
         tuning_dl = torch.utils.data.DataLoader(
-            self.tuning_ques,
+            self.ques_data,
             num_workers=0,
             batch_size=1,
             collate_fn=self.user_fn1,
             shuffle=True
             )
         return tuning_dl
+
+    def read_data1(self):
+        user_data =[]
+
+        for i in range(self.poi_num)
+        user_data.append(self.tuning_ques[i],)
+        
+        return user_data
+
         # for i in range(len(self.training_user)):
 
         #     print("train User : ", self.training_user[i])
