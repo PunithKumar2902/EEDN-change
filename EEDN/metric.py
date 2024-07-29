@@ -38,16 +38,16 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     # print("\nexamples : ",label[0])
     # print("\n",label[1])
 
-    # i=0
-    for top, l in zip(top_, label__):
+    i=0
+    # for top, l in zip(top_, label__):
     # for top, l in zip(top_, label):
-
+        print("\nchecking in pre rec top\n")
         # if len(l)==0:
         #     continue
         try:
-            # print(label_[i])
-            # print(l)
-            # i+=1
+            print("try ",label_[i])
+            print("org ", l)
+            i+=1
             l = l[l != 0] - 1
         except Exception as e:
             l = l[l != 0]
