@@ -224,9 +224,9 @@ if __name__ == '__main__':
 
     ds = dataset()
 
-    tune = ds.tune_dl
+    tune = ds.use()
 
-    for i in tune_dl:
+    for i in tune:
         print(i)
 
 

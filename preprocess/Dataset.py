@@ -22,15 +22,15 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
 
-        
-        tuning_dl = torch.utils.data.DataLoader(
+        def use(self):        
+            self.tuning_dl = torch.utils.data.DataLoader(
             self.tuning_ques,
             num_workers=0,
             batch_size=1,
             collate_fn=self.user_fn,
             shuffle=True
-        )
-
+            )
+        return self.tuning_dl
         # for i in range(len(self.training_user)):
 
         #     print("train User : ", self.training_user[i])
