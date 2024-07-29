@@ -22,7 +22,7 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
 
-        for i in range(len(training_user)):
+        for i in range(len(self.training_user)):
 
             print("train User traj : ", self.training_user[0])
             print()
