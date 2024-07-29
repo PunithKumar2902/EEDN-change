@@ -66,6 +66,8 @@ class Dataset(object):
             valid_times.extend(self.tuning_times[i])
             user_valid.append((valid_input, valid_times, self.test_user[i], ), )
 
+        print()
+
         if C.COLD_START:
             print('#User for Cold-Start', len(user_valid))
 
