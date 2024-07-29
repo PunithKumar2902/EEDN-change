@@ -222,7 +222,7 @@ if __name__ == '__main__':
     # study = optuna.create_study(direction="maximize")
     # study.optimize(main, n_trials=1)
 
-    ds = Dataset()
+    ds = dataset()
 
     tune = ds.tune_dl
 
