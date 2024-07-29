@@ -39,6 +39,9 @@ def vaild(prediction, label, top_n, pre, rec, map_, ndcg):
     print("\n",label[1])
 
     for top, l in zip(top_, label):
+
+        if len(l)==0:
+            continue
         try:
             l = l[l != 0] - 1
         except Exception as e:
