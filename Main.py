@@ -42,6 +42,10 @@ def train_epoch(model, user_dl, optimizer, opt):
         print("event_type shape : ",event_type.size())
         # print("event_type : ",event_type)
         print()
+        
+        print()
+        print("test_label shape : ",test_label.size())
+        # print("event_type : ",event_type)
         print()
 
         """ forward """
