@@ -28,9 +28,9 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
     model.train()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
 
-    labels__   = torch(1)
+    labels__   = torch.tensor(1)
     for x in ds.tuning_dl:
-        labels__ =x
+        labels__ = x
 
     for batch in tqdm(user_dl, mininterval=2, desc='  - (Training)   ', leave=False):
         optimizer.zero_grad()
