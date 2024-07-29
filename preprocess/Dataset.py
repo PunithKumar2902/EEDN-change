@@ -129,7 +129,7 @@ class Dataset(object):
         event_type = self.paddingLong2D(event_type)
         event_time = self.paddingLong2D(event_time)
         test_label = self.paddingLong2D(test_label)
-        print("org e ",event_type)
+        # print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
         return event_type, event_time, test_label
 
