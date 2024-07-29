@@ -16,7 +16,7 @@ poi_dict = {
     'ml-1M': 3533,  # 3629
     'douban-book': 22294,
     'Gowalla': 32510,
-    'Yelp2018': 9,
+    # 'Yelp2018': 9,
     'Yelp2018': 42713,
     # 'Foursquare': 28483
 }

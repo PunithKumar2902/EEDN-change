@@ -52,7 +52,7 @@ def train_epoch(model, user_dl, optimizer, opt):
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
 
-        prediction = torch.transpose(prediction, 0, 1)
+        # prediction = torch.transpose(prediction, 0, 1)
 
         # print("prediction shape : ",prediction.size())
         # print()
