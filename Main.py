@@ -38,7 +38,7 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
 
         # pun = torch.from_numpy(np.array(batch))
         # print("batch shape : ",pun.size())
-
+        print("batch print ",batch)
         event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
 
         # print()
