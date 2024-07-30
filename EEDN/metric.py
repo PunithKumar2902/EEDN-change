@@ -43,8 +43,11 @@ def precision_recall_ndcg_at_k(k, rankedlist, test_matrix):
     # if count != 0:
     #     map = ap / count
 
+    count1=count
+    if count==0:
+        count1 =1
     # return float(count / k), float(count / len(test_matrix)), map, float(dcg_k / idcg_k)
-    return float(count / k), float(MRR/count), 0, 0
+    return float(count / k), float(MRR/count1), 0, 0
 
 
 def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
