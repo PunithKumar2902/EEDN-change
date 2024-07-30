@@ -138,7 +138,7 @@ class Dataset(object):
 
         # print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
-        return ques_ev_type, event_type, event_time, test_label, que_test_label
+        return ques_ev_type, event_type, event_time, test_label, ques_test_label
 
     def user_fn1(self, insts):
         """ Collate function, as required by PyTorch. """
