@@ -133,17 +133,25 @@ def train(model, data, ds, optimizer, scheduler, opt):
         np.set_printoptions(formatter={'float': '{: 0.5f}'.format})
         start = time.time()
         [pre, rec, map_, ndcg] = train_epoch(model, user_dl, ds, optimizer, opt)
-        print('\r(Training)  P@k:{pre},    R@k:{rec}, \n'
-              '(Training)map@k:{map_}, ndcg@k:{ndcg}, '
-              'elapse:{elapse:3.3f} min'
-              .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, map_=map_, ndcg=ndcg))
+        # print('\r(Training)  P@k:{pre},    R@k:{rec}, \n'
+        #       '(Training)map@k:{map_}, ndcg@k:{ndcg}, '
+        #       'elapse:{elapse:3.3f} min'
+        #       .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, map_=map_, ndcg=ndcg))
+        print('\r(Training)  P@k:{pre},    MRR@k:{rec}, \n'
+              '(Training)Hit@k:{map_}'
+              ,'elapse:{elapse:3.3f} min'
+              .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, ndcg=ndcg))
 
         start = time.time()
         [pre, rec, map_, ndcg] = eval_epoch(model, user_valid_dl, ds, opt)
-        print('\r(Test)  P@k:{pre},    R@k:{rec}, \n'
-              '(Test)map@k:{map_}, ndcg@k:{ndcg}, '
-              'elapse:{elapse:3.3f} min'
-              .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, map_=map_, ndcg=ndcg))
+        # print('\r(Test)  P@k:{pre},    R@k:{rec}, \n'
+        #       '(Test)map@k:{map_}, ndcg@k:{ndcg}, '
+        #       'elapse:{elapse:3.3f} min'
+        #       .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, map_=map_, ndcg=ndcg))
+        print('\r(Test)  P@k:{pre},    MRR@k:{rec}, \n'
+              '(Test)Hit@k:{map_}'
+              ,'elapse:{elapse:3.3f} min'
+              .format(elapse=(time.time() - start) / 60, pre=pre, rec=rec, ndcg=ndcg))
 
         scheduler.step()
 
