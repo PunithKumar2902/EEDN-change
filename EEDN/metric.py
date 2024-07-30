@@ -86,6 +86,9 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
     # print()
     # print("event_type : ")
     print("event type (in pre rec top) :",event_type)
+
+    for i in range(5):
+        print("fevent type (in pre rec top) {i}:",event_type[i])
     # print()
     print("\nInside pre rec top\n")
     for i, e in enumerate(event_type):
