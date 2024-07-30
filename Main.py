@@ -35,6 +35,13 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
     #     labels_ = i
 
     # print("labels : ",labels__)
+
+    labels__ = []
+    
+    for i in s_dl:
+        labels__ = i
+
+
     for batch in tqdm(user_dl, mininterval=2, desc='  - (Training)   ', leave=False):
         optimizer.zero_grad()
 
@@ -43,30 +50,24 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
 
         # pun = torch.from_numpy(np.array(batch))
         # print("batch shape : ",pun.size())
-        print("batch print ",batch)
-
-        labels__ = []
-        # for i in s_dl:
-        #     labels__ = i
-
-        #     print("labels : ",i)
+        # print("batch print ",batch)
 
         print("---------------------------------------------------------------")
         event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
 
         # print()
         # print("event_type shape : ",event_type.size())
-        # # print("event_type : ",event_type)
+        print("event_type (after loading): ",event_type)
         # print()
         
         # print()
         # print("test_label shape : ",test_label.size())
-        # # print("event_type : ",event_type)
         # print()
 
         """ forward """
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
+        print("event_type (after preiction): ",event_type)
 
         # prediction = torch.transpose(prediction, 0, 1)
 
