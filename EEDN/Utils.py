@@ -30,7 +30,7 @@ def get_subsequent_mask(seq):
     return subsequent_mask
 
 
-def type_loss(prediction, label__, label, event_time, test_label, ques_ev_type, opt):
+def type_loss(prediction, label__, label, event_time, test_label, que_test_label, opt):
     """ Event prediction loss, cross entropy or label smoothing. """
 
     # convert [1,2,3] based types to [0,1,2]; also convert padding events to -1

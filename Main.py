@@ -79,7 +79,7 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__,test_label, event_type)
 
         """ backward """
-        loss = Utils.type_loss(prediction, event_type, event_time, labels__,test_label, opt)
+        loss = Utils.type_loss(prediction, event_type, event_time,test_label, ques_ev_type,opt)
 
         loss.backward(retain_graph=True)
         """ update parameters """
