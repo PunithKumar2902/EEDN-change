@@ -34,9 +34,9 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
 
     # new_label = 
 
-    print("top size : ",top_.size())
+    # print("top size : ",top_.size())
     
-    print("ground list shape : ",label__.size())
+    # print("ground list shape : ",label__.size())
     # print("\nexamples : ",label[0])
     # print("\n",label[1])
 
@@ -63,8 +63,8 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
 
 
 ################ MUST UNCOMMENT ######################################        
-        # pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
-        pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, label__)
+        pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
+        # pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, label__)
         pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
 
     # print("Recomended list : ",recom_list)
