@@ -41,7 +41,7 @@ def type_loss(prediction, label__, label, event_time, test_label, que_test_label
     multi_hots = torch.zeros(label__.size(0), C.USER_NUMBER, device='cuda:0', dtype=torch.float32)
 
     # for i, (t, ti, tl) in enumerate(zip(label, event_time, test_label)):
-    for i, (t, ti, tl) in enumerate(zip(label__, event_time, ques_ev_type)):
+    for i, (t, ti, tl) in enumerate(zip(label__, event_time, que_test_label)):
         multi_hots[i][t[t!=0]-1], multi_hots[i][tl[tl!=0]-1] = opt.lambda_, opt.delta
 
     log_prb = F.logsigmoid(prediction)

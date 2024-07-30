@@ -53,11 +53,11 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         # print("batch print ",batch)
 
         print("---------------------------------------------------------------")
-        event_type, event_time, test_label,ques_ev_type = map(lambda x: x.to(opt.device), batch)
+        ques_ev_type, event_type, event_time, test_label, que_test_label = map(lambda x: x.to(opt.device), batch)
 
         # print()
         # print("event_type shape : ",event_type.size())
-        print("event_type (after loading): ",event_type)
+        # print("event_type (after loading): ",event_type)
         # print()
         
         # print()
@@ -67,7 +67,7 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         """ forward """
         #passes user trajectory and gets the prediction of TOP POIs and User embeddings
         prediction, users_embeddings = model(event_type)
-        print("event_type (after preiction): ",event_type)
+        # print("event_type (after preiction): ",event_type)
 
         # prediction = torch.transpose(prediction, 0, 1)
 
@@ -79,7 +79,7 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__,test_label, event_type)
 
         """ backward """
-        loss = Utils.type_loss(prediction, event_type, event_time,test_label, ques_ev_type,opt)
+        loss = Utils.type_loss(prediction, ques_ev_type,event_type, event_time,test_label, ques_test_label,opt)
 
         loss.backward(retain_graph=True)
         """ update parameters """

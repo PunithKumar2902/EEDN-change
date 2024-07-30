@@ -22,7 +22,8 @@ class Dataset(object):
 
         self.user_data, self.user_valid= self.read_data()
         self.ques_data = self.read_data1()
-
+    
+    # we need all the data at once for evaluation so we are getting a data loader
     def use(self):        
         tuning_dl = torch.utils.data.DataLoader(
             self.ques_data,
@@ -76,15 +77,17 @@ class Dataset(object):
             #     dict_[i] = 1
 
         for i in range(self.user_num):
-            user_data.append((self.training_user[i], self.tuning_times[i],self.tuning_user[i],self.tuning_ques[i]), )
+            user_data.append((self.training_user[i],self.training_ques[i], self.tuning_times[i],self.tuning_user[i],self.tuning_ques[i]), )
             if C.COLD_START and i not in dict_:  # time complexity of O(1)
                 continue
+            valid_que = self.training_ques[i].copy()
+            valid_que.extend(self.tuning_ques[i])
             valid_input = self.training_user[i].copy()
             valid_input.extend(self.tuning_user[i])
             valid_times = self.training_times[i].copy()
             valid_times.extend(self.tuning_times[i])
 
-            user_valid.append((valid_input, valid_times, self.test_user[i],self.test_ques[i]), )#line changed
+            user_valid.append((valid_ques, valid_input, valid_times, self.test_user[i],self.test_ques[i]), )#line changed
 
         print()
 
@@ -125,14 +128,17 @@ class Dataset(object):
 
     def user_fn(self, insts):
         """ Collate function, as required by PyTorch. """
-        (event_type, event_time, test_label,ques_ev_type) = list(zip(*insts))
+        (ques_ev_type, event_type, event_time, test_label,ques_test_label) = list(zip(*insts))
+
+        ques_ev_type = self.paddingLong2D(ques_ev_type)
         event_type = self.paddingLong2D(event_type)
         event_time = self.paddingLong2D(event_time)
         test_label = self.paddingLong2D(test_label)
-        ques_ev_type = self.paddingLong2D(ques_ev_type)
+        que_test_label = self.paddingLong2D(que_test_label)
+
         # print("org e ",event_type)
         # ques_ev_type = self.paddingLong2D(ques_ev_type)
-        return event_type, event_time, test_label,ques_ev_type
+        return ques_ev_type, event_type, event_time, test_label, que_test_label
 
     def user_fn1(self, insts):
         """ Collate function, as required by PyTorch. """
