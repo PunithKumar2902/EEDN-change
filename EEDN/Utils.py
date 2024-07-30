@@ -37,8 +37,8 @@ def type_loss(prediction, label__, label, event_time, test_label, que_test_label
     prediction_ = torch.transpose(prediction, 0, 1)
     prediction_ = torch.squeeze(prediction_[:, :], 1)
 
-    # multi_hots = torch.zeros(label.size(0), C.POI_NUMBER, device='cuda:0', dtype=torch.float32)
-    multi_hots = torch.zeros(label__.size(0), C.USER_NUMBER, device='cuda:0', dtype=torch.float32)
+    multi_hots = torch.zeros(label.size(0), C.POI_NUMBER, device='cuda:0', dtype=torch.float32)
+    # multi_hots = torch.zeros(label__.size(0), C.USER_NUMBER, device='cuda:0', dtype=torch.float32)
 
     # for i, (t, ti, tl) in enumerate(zip(label, event_time, test_label)):
     for i, (t, ti, tl) in enumerate(zip(label__, event_time, que_test_label)):
