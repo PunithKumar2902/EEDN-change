@@ -87,7 +87,7 @@ class Dataset(object):
             valid_times = self.training_times[i].copy()
             valid_times.extend(self.tuning_times[i])
 
-            user_valid.append((valid_ques, valid_input, valid_times, self.test_user[i],self.test_ques[i]), )#line changed
+            user_valid.append((valid_que, valid_input, valid_times, self.test_user[i],self.test_ques[i]), )#line changed
 
         print()
 
