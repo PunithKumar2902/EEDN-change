@@ -11,7 +11,7 @@ else:
 class Dataset(object):
     def __init__(self):
 
-        print("---------------------Inside Dataset Class ----------------------")
+        # print("---------------------Inside Dataset Class ----------------------")
         self.user_num = C.USER_NUMBER
         self.poi_num = C.POI_NUMBER
         self.directory_path = './data/{dataset}/'.format(dataset=C.DATASET)

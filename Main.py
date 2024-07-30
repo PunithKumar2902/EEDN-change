@@ -23,7 +23,7 @@ from tqdm import tqdm
 def train_epoch(model, user_dl, ds, optimizer, opt):
     """ Epoch operation in training phase. """
 
-    print("----------------------Inside Train epoch---------------------")
+    # print("----------------------Inside Train epoch---------------------")
 
     model.train()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
@@ -52,7 +52,7 @@ def train_epoch(model, user_dl, ds, optimizer, opt):
         # print("batch shape : ",pun.size())
         # print("batch print ",batch)
 
-        print("---------------------------------------------------------------")
+        # print("---------------------------------------------------------------")
         ques_ev_type, event_type, event_time, test_label, ques_test_label = map(lambda x: x.to(opt.device), batch)
 
         # print()
@@ -95,6 +95,13 @@ def eval_epoch(model, user_valid_dl, ds, opt):
     model.eval()
     [pre, rec, map_, ndcg] = [[[] for i in range(4)] for j in range(4)]
     with torch.no_grad():
+
+        s_dl  = ds.use() #got the data loader for labels
+        labels__ = []
+        
+        for i in s_dl:
+            labels__ = i
+
         for batch in tqdm(user_valid_dl, mininterval=2,
                           desc='  - (Validation) ', leave=False):
             """ prepare test data """
