@@ -34,9 +34,9 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
 
     # new_label = 
 
-    # print("top size : ",top_.size())
+    print("top size : ",top_.size())
     
-    # print("ground list shape : ",label__.size())
+    print("ground list shape : ",label__.size())
     # print("\nexamples : ",label[0])
     # print("\n",label[1])
 
