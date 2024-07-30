@@ -57,7 +57,8 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
         if len(ground_list) == 0:
             continue
         
-        # print("ground list shape : ",label.size())
+        print("recom list size : ",recom_list.size())
+        print("ground list shape : ",ground_list.size())
 
         # map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
 
