@@ -85,7 +85,7 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
     target_ = torch.ones(event_type.size()[0], C.USER_NUMBER, device='cuda:0', dtype=torch.double)
     # print()
     # print("event_type : ")
-    # print(event_type)
+    print("event type (in pre rec top) :",event_type)
     # print()
     print("\nInside pre rec top\n")
     for i, e in enumerate(event_type):
