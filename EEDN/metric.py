@@ -100,8 +100,8 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
     # print("target size : ",target_.size())
     
     #_________________________________________________________________
-    # prediction_ = torch.transpose(prediction, 0, 1)
-    # prediction_ = prediction_ * target_
+    prediction = prediction * target_
+    prediction_ = torch.transpose(prediction, 0, 1)
     #___________________________________________________________________
 
     # print()
