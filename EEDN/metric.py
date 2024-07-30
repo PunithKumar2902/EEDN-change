@@ -32,6 +32,8 @@ def precision_recall_ndcg_at_k(k, rankedlist, test_matrix):
 def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
     top_ = torch.topk(prediction, top_n, -1, sorted=True)[1]
 
+    # new_label = 
+
     # print("top size : ",top_.size())
     
     # print("ground list shape : ",len(label))
@@ -61,7 +63,8 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
 
 
 ################ MUST UNCOMMENT ######################################        
-        pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
+        # pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
+        pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, label__)
         pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
 
     # print("Recomended list : ",recom_list)
