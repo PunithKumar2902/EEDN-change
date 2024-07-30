@@ -98,7 +98,8 @@ def eval_epoch(model, user_valid_dl, ds, opt):
         for batch in tqdm(user_valid_dl, mininterval=2,
                           desc='  - (Validation) ', leave=False):
             """ prepare test data """
-            event_type, event_time, test_label = map(lambda x: x.to(opt.device), batch)
+            #event_type, event_time, test_label
+            ques_ev_type, event_type, event_time, test_label, ques_test_label = map(lambda x: x.to(opt.device), batch)
 
             """ forward """
             prediction, users_embeddings = model(event_type)  # X = (UY+Z) ^ T
@@ -106,7 +107,9 @@ def eval_epoch(model, user_valid_dl, ds, opt):
             # prediction = torch.transpose(prediction, 0, 1)
 
             """ compute metric """
-            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__, event_type)
+            # metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__, event_type)
+            metric.pre_rec_top(pre, rec, map_, ndcg, prediction, labels__,test_label, event_type)
+
 
     results_np = map(lambda x: [np.around(np.mean(i), 5) for i in x], [pre, rec, map_, ndcg])
     return results_np
