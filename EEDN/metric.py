@@ -57,12 +57,12 @@ def vaild(prediction, label__,label, top_n, pre, rec, map_, ndcg):
         
         # print("ground list shape : ",label.size())
 
-        map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
+        # map2, mrr, ndcg2 = metric.map_mrr_ndcg(recom_list, ground_list)
 
 
 ################ MUST UNCOMMENT ######################################        
-        # pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
-        # pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
+        pre2, rec2, map2, ndcg2 = precision_recall_ndcg_at_k(top_n, recom_list, ground_list)
+        pre.append(pre2), rec.append(rec2), map_.append(map2), ndcg.append(ndcg2)
 
     # print("Recomended list : ",recom_list)
 
