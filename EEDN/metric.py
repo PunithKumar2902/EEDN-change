@@ -88,19 +88,21 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
     print("event type (in pre rec top) :",event_type)
 
     for i in range(5):
-        print("fevent type (in pre rec top) {i}:",event_type[i])
+        print(f"event type (in pre rec top) {i}:",event_type[i])
     # print()
     print("\nInside pre rec top\n")
     for i, e in enumerate(event_type):
         print(i,e)
-        e = e[e!=0]-1
-        target_[i][e] = 0
+        # e = e[e!=0]-1
+        # target_[i][e] = 0
 
     # print("prediction size : ",prediction.size())
     # print("target size : ",target_.size())
     
-    prediction_ = torch.transpose(prediction, 0, 1)
-    prediction_ = prediction_ * target_
+    #_________________________________________________________________
+    # prediction_ = torch.transpose(prediction, 0, 1)
+    # prediction_ = prediction_ * target_
+    #___________________________________________________________________
 
     # print()
     # print("prediction shape : ",prediction.size())
@@ -118,5 +120,8 @@ def pre_rec_top(pre, rec, map_, ndcg, prediction, label__, label, event_type):
 
     # for i, topN in enumerate([1, 5, 10, 20]):
     # for i, topN in enumerate([1, 5]):
-    for i, topN in enumerate([1]):
-        vaild(prediction_, label__, label, topN, pre[i], rec[i], map_[i], ndcg[i])
+
+
+    #_________________________________________________
+    # for i, topN in enumerate([1]):
+    #     vaild(prediction_, label__, label, topN, pre[i], rec[i], map_[i], ndcg[i])
