@@ -32,7 +32,7 @@ def precision_recall_ndcg_at_k(k, rankedlist, test_matrix):
     for rank, item in enumerate(b1,start=1):
         if item in s2:
             MRR+= 1 / rank
-            hits.append((rank,val))
+            hits.append((rank,item))
 
     count = len(hits)
 
